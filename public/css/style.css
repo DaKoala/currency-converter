@@ -1,0 +1,12 @@
+.container {
+    width: 60%;
+    margin: 50px auto 0 auto;
+}
+
+.header {
+    text-align: center;
+}
+
+.alert {
+    margin-top: 20px;
+}

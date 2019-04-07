@@ -1,0 +1,33 @@
+doctype html
+html
+    include includes/head
+    body
+        div(class="container")
+            h1(class="header") Currency Converter
+            form(action="/" method="POST")
+                div(class="form-group")
+                    label Currency I have
+                    select(class="form-control" name="from")
+                        option AUD
+                        option CAD
+                        option EUR
+                        option GBP
+                        option JPY
+                        option USD
+                div(class="form-group")
+                    label Amount
+                    input(type="number" class="form-control" name="amount")
+                div(class="form-group")
+                    label Currency I need
+                    select(class="form-control" name="to")
+                        option AUD
+                        option CAD
+                        option EUR
+                        option GBP
+                        option JPY
+                        option USD
+                button(class="btn btn-primary" type="submit") Convert
+            if success
+                div(class="alert alert-success" role="alert")= success
+            if error
+                div(class="alert alert-danger" role="alert")= error
