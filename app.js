@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.render('index', {});
+    res.render('register', {});
 });
 
 app.post('/', async (req, res) => {
@@ -49,7 +49,7 @@ app.post('/', async (req, res) => {
     }
 });
 
-const PORT = 3000;
+const PORT = 4000;
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`);
 });

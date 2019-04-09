@@ -1,0 +1,20 @@
+doctype html
+html
+    include includes/head
+    body
+        h1(class="header") Sign up
+        div(class="container")
+            form(action="/register" method="POST")
+                div(class="form-group")
+                    label(for="r-email") Email address
+                    input(type="email" class="form-control" id="r-email" name="email")
+                div(class="form-group")
+                    label(for="r-username") Username
+                    input(type="text" class="form-control" id="r-username" name="username")
+                div(class="form-group")
+                    label(for="r-password") Password
+                    input(type="password" class="form-control" id="r-password" name="password")
+                div(class="form-group")
+                    label(for="r-confirm") Confirm your password
+                    input(type="password" class="form-control" id="r-confirm" name="confirm")
+                button(type="submit" class="btn btn-primary") Sign up
