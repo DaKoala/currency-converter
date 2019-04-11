@@ -3,17 +3,18 @@ html
     include includes/head
     body
         div(class="container")
-            h1(class="header") Sign up
-            form(action="/register" method="POST")
+            h1(class="header") Log in
+            if info
+                div(class="alert alert-info" role="alert")= info
+            if error
+                div(class="alert alert-danger" role="alert")= error
+            form(action="/login" method="POST")
                 div(class="form-group")
                     label(for="r-username") Username
                     input(type="text" class="form-control" id="r-username" name="username" required)
                 div(class="form-group")
                     label(for="r-password") Password
                     input(type="password" class="form-control" id="r-password" name="password" required)
-                div(class="form-group")
-                    label(for="r-confirm") Confirm your password
-                    input(type="password" class="form-control" id="r-confirm" name="confirm" required)
-                button(type="submit" class="btn btn-primary") Sign up
-                span Already have account?
-                    a(href='/login') Log in
+                button(type="submit" class="btn btn-primary") Log in
+                span Don't have account?
+                    a(href='/') Sign up

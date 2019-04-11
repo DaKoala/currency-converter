@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const API_KEY = require('./api-key');
+const io = require('./io');
 
 const app = express();
 
@@ -12,6 +13,49 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
     res.render('register', {});
+});
+
+app.post('/register', async (req, res) => {
+    const form = req.body;
+    const valid = Object.hasOwnProperty.call(form, 'username')
+    && Object.hasOwnProperty.call(form, 'password')
+    && Object.hasOwnProperty.call(form, 'confirm');
+    if (!valid) {
+        res.render('register', {
+            error: 'Missing fields in the form!',
+        });
+        return;
+    }
+    if (form.password !== form.confirm) {
+        res.render('register', {
+            error: 'Inconsistent password!',
+        });
+        return;
+    }
+    if (io.hasUser(form.username)) {
+        res.render('register', {
+            error: 'The username has already existed.',
+        });
+    }
+    await io.addUser(form);
+    res.render('login', {
+        info: 'Your account is successfully created! Please log in again.'
+    });
+});
+
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+app.post('/login', (req, res) => {
+    const form = req.body;
+    if (io.authUser(form)) {
+        res.render('index', {});
+    } else {
+        res.render('login', {
+            error: 'Incorrect username/password!',
+        });
+    }
 });
 
 app.post('/', async (req, res) => {
